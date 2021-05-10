@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  monitoring-cats:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: Monitoring_Cats
+    image: monitoring-cats
