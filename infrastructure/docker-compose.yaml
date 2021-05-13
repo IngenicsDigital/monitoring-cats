@@ -18,11 +18,14 @@ services:
       - ./grafana:/etc/grafana/provisioning/
 
   glances:
-    image: nicolargo/glances:3.6.1.2
+    # Only the dev contains the additional packages for the exporter.
+    # After version 3.1.7 there will be also versioned release images with all the dependencies.
+    image: nicolargo/glances:alpine-dev
     network_mode: host
     environment:
-      # With the `-w` flag glances will also setup an webserver with the stats on http://localhost:61208/
-      GLANCES_OPT: "-w"
+      # The `--quiet` flag is needed to output the metrics correctly
+      # See https://github.com/nicolargo/glances/issues/1750#issuecomment-719921086
+      GLANCES_OPT: "--quiet --export prometheus"
     pid: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

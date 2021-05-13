@@ -12,6 +12,17 @@ scrape_configs:
     # see https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config
     static_configs:
       - targets: [ 'localhost:8080' ]
+        labels:
+          # with labels we can now distinguish between the different metric sources
+          source: 'spring-boot'
+
+  - job_name: 'Monitoring Cats System'
+    metrics_path: '/metrics'
+    scheme: http
+    static_configs:
+      - targets: [ 'localhost:9091' ]
+        labels:
+          source: 'glances'
 
 # to test the successful Prometheus setup. Start the infrastructure with `docker-compose up` and
 # browse to http://localhost:9090/targets. There should be the specified job from above with an green `UP`.
