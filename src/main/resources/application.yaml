@@ -9,3 +9,7 @@ management:
   endpoint:
     prometheus:
       enabled: true
+
+logging:
+  file:
+    name: cat.log

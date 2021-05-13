@@ -10,6 +10,12 @@ datasources:
     url: http://localhost:9090
     isDefault: true
     editable: true
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://localhost:3100
+    isDefault: false
+    editable: true
 
 # To check out the functioning Grafana installation open http://localhost:3000/ and use `admin:admin` to login.
 # There should be now the datasource already configured as well as a dashboard.

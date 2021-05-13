@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -601,6 +601,36 @@
       ],
       "title": "Processes / Threads",
       "type": "stat"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 15,
+      "options": {
+        "dedupStrategy": "none",
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.5.6",
+      "targets": [
+        {
+          "expr": "{filename=\"/var/log/syslog\",job=\"system\"}",
+          "refId": "A"
+        }
+      ],
+      "title": "System Logs",
+      "type": "logs"
     }
   ],
   "schemaVersion": 27,
@@ -617,5 +647,5 @@
   "timezone": "",
   "title": "Glances",
   "uid": "vhPxwYCMk",
-  "version": 1
+  "version": 2
 }

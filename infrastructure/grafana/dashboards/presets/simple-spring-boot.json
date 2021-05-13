@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -511,6 +511,38 @@
       ],
       "title": "Successful Requests on Endpoints",
       "type": "bargauge"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 14,
+      "options": {
+        "dedupStrategy": "none",
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.5.6",
+      "targets": [
+        {
+          "expr": "{job=\"monitoring_cats\"}",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Spring Logs",
+      "type": "logs"
     }
   ],
   "refresh": false,
@@ -528,5 +560,5 @@
   "timezone": "",
   "title": "Simple Spring Boot",
   "uid": "Ifnk0YjMk",
-  "version": 1
+  "version": 2
 }
