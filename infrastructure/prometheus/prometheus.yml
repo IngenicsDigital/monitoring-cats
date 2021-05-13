@@ -1,0 +1,17 @@
+# For demonstration the default scrape time is lowered
+# More about the config of prometheus: https://prometheus.io/docs/prometheus/latest/configuration/configuration/
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  # Now we instruct prometheus to scrape the Spring-Boot metrics
+  - job_name: 'Monitoring Cats Spring-Boot'
+    metrics_path: '/actuator/prometheus'
+    scheme: http
+    # If auth is used for the metrics endpoint it can also specified here
+    # see https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config
+    static_configs:
+      - targets: [ 'localhost:8080' ]
+
+# to test the successful Prometheus setup. Start the infrastructure with `docker-compose up` and
+# browse to http://localhost:9090/targets. There should be the specified job from above with an green `UP`.

@@ -1,0 +1,10 @@
+version: '3'
+services:
+
+  prometheus:
+    image: prom/prometheus:v2.27.0
+    # Don't do this in production. There better use docker networks!
+    # Its here for simplicity
+    network_mode: host
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
