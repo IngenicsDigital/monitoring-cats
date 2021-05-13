@@ -17,3 +17,13 @@ services:
       # All of this can be also done in the UI.
       - ./grafana:/etc/grafana/provisioning/
 
+  glances:
+    image: nicolargo/glances:3.6.1.2
+    network_mode: host
+    environment:
+      # With the `-w` flag glances will also setup an webserver with the stats on http://localhost:61208/
+      GLANCES_OPT: "-w"
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
