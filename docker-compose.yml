@@ -7,3 +7,21 @@ services:
       dockerfile: Dockerfile
     container_name: Monitoring_Cats
     image: monitoring-cats
+    # when doing this make sure you have installed the loki logging driver on your system
+    # see https://grafana.com/docs/loki/latest/clients/docker-driver/
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        # With the following pipeline configuration, we are parsing the spring boot log to label every logline
+        # with log level, thread number and logger class.
+        loki-pipeline-stages: |
+          - regex:
+              expression: '^(?P<timestamp>\d{4}-\d{2}-\d{2}\s\d{1,2}:\d{2}\:\d{2}\.\d{3})\s+(?P<level>[A-Z]{4,5})\s(?P<pid>\d+)\s---\s[\s*(?P<thread>.*)]\s(?P<logger>.*)\s+\:\s(?P<message>.*)'
+          - labels:
+              level:
+              thread:
+              logger:
+          - timestamp:
+              format: '2006-01-02 15:04:05.000'
+              source: timestamp
