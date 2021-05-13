@@ -1,0 +1,11 @@
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: "prometheus"
+        # On a public instance of your application make sure to secure the endpoints
+        # more: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints-security
+  endpoint:
+    prometheus:
+      enabled: true
