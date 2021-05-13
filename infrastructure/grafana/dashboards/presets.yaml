@@ -1,0 +1,14 @@
+apiVersion: 1
+
+# This a list of predefined dashboards. With it the Grafana container start instantly with some
+# setup monitoring dashboards to look at. For a list of all possible settings:
+# https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards
+providers:
+  - name: 'Presets'
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/presets
+      foldersFromFilesStructure: true
+
+# To check out the functioning Grafana installation open http://localhost:3000/ and use `admin:admin` to login.
+# There should be now the datasource already configured as well as a dashboard.

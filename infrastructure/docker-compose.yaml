@@ -8,3 +8,12 @@ services:
     network_mode: host
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:7.5.6
+    network_mode: host
+    volumes:
+      # This bind is only there to provision a dashboard and the datasources.
+      # All of this can be also done in the UI.
+      - ./grafana:/etc/grafana/provisioning/
+
