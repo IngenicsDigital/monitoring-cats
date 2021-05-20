@@ -1,0 +1,22 @@
+image:
+  name: alpine/git:v2.30.2
+  entrypoint: [""]
+
+workflow:
+  rules: #Execute pipeline for the default branch
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+variables:
+  GITHUB_REPOSITORY: "https://Poeschl:${MARPOE_ACCESS_TOKEN}@github.com/PixelGmbH/monitoring-cats.git"
+
+mirror to GitHub:
+  stage: deploy
+  before_script:
+    - git checkout $CI_DEFAULT_BRANCH
+    - git reset origin/$CI_DEFAULT_BRANCH --hard
+    - ./.gitlab/rewrite-commiter-mails.sh "$MARPOE_MAIL" Poeschl
+  script:
+    - >
+      git remote get-url github > /dev/null && git remote set-url github "$GITHUB_REPOSITORY" ||
+      git remote add github "$GITHUB_REPOSITORY"
+    - git push github -f
